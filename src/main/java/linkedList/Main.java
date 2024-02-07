@@ -6,18 +6,18 @@ public class Main {
 		/*
 		 * list of lists
 		 */
-//		ListItem<ListItem<Character>> head = NewLinkedList.newListOfLists();
-//		Utilities.showLinkedListOfLinkedLists(head, true);
-//		Utilities.showLinkedListOfLinkedLists(head, false);
-//		System.out.println("\n");
+		ListItem<ListItem<Character>> head = NewLinkedList.newListOfLists();
+		Utilities.showLinkedListOfLinkedLists(head, true);
+		Utilities.showLinkedListOfLinkedLists(head, false);
+		System.out.println("\n");
 		
 		/*
 		 * linked list
 		 */
-		ListItem<Character> head_simple_list = NewLinkedList.newSimpleList();
-		Utilities.showLinkedList(head_simple_list, true);
-		Utilities.showLinkedList(head_simple_list, false);
-		System.out.println("\n");
+//		ListItem<Character> head_simple_list = NewLinkedList.newSimpleList();
+//		Utilities.showLinkedList(head_simple_list, true);
+//		Utilities.showLinkedList(head_simple_list, false);
+//		System.out.println("\n");
 
 		/*
 		 * H3 list of lists -> simple linked list in place
@@ -55,28 +55,21 @@ public class Main {
 		 * H7 & H8: reverse list of lists (iterative and recursive)
 		 */
 		
-//		ListItem<ListItem<Character>> reversed_list_inplace = CharListProcessor.reverseListOfListsInPlaceIteratively(head);
-//		Utilities.showLinkedListOfLinkedLists(reversed_list_inplace, false);
-//		Utilities.showLinkedListOfLinkedLists(reversed_list_inplace, true);
-//		System.out.println("\n");
-//
-//		CharListProcessor Processor = new CharListProcessor(); 
-//		
-//		ListItem<ListItem<Character>> reversed_list_copy = Processor.reverseListOfListsInPlaceRecursively(NewLinkedList.newListOfLists());
-//		Utilities.showLinkedListOfLinkedLists(reversed_list_copy, false);
-//		Utilities.showLinkedListOfLinkedLists(reversed_list_copy, true);
-//		System.out.println("\n");
+		// list of lists iteratively
+		ListItem<ListItem<Character>> reversed_list_iteratively = CharListProcessor.reverseListOfListsInPlaceIteratively(head);
+		Utilities.showLinkedListOfLinkedLists(reversed_list_iteratively, false);
+		Utilities.showLinkedListOfLinkedLists(reversed_list_iteratively, true);
 		
+		// simple list recursively
 //		ListItem<Character> reversedSimpleList = CharListProcessor.reverseListInPlaceRecursivley(head_simple_list);
 //		Utilities.showLinkedList(reversedSimpleList, false);
 //		Utilities.showLinkedList(reversedSimpleList, true);
-		
-		ListItem<ListItem<Character>> reversed_list_copy = CharListProcessor.reverseListOfListsInPlaceRecursively(NewLinkedList.newListOfListsSmall());
-		Utilities.showLinkedListOfLinkedLists(reversed_list_copy, false);
-		Utilities.showLinkedListOfLinkedLists(reversed_list_copy, true);
-		System.out.println("\n");
-
-
+//		
+		// list of lists recursively
+//		ListItem<ListItem<Character>> reversed_list_copy = CharListProcessor.reverseListOfListsInPlaceRecursively(head);
+//		Utilities.showLinkedListOfLinkedLists(reversed_list_copy, false);
+//		Utilities.showLinkedListOfLinkedLists(reversed_list_copy, true);
+//		System.out.println("\n");
 
 		
 	}

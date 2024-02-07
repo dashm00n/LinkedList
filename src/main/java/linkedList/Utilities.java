@@ -30,7 +30,7 @@ public class Utilities {
 
 		if (print_values == true) {
 			for (ListItem<ListItem<Character>> p = HEAD; p != null; p = p.next) {
-				System.out.println("\n**neue Einzelliste**");
+				System.out.println("\n---SimpleLinkedList---");
 				if (p != null && p.key == null) {
 					System.out.println(p.key);
 				} else {
@@ -41,7 +41,8 @@ public class Utilities {
 			}
 		} else {
 			for (ListItem<ListItem<Character>> p = HEAD; p != null; p = p.next) {
-				System.out.println("\n**neue Einzelliste**");
+				System.out.println("\n---ListOfLists Item---\n" + p);
+				System.out.println("---SimpleLinkedList---");
 				if (p != null && p.key == null) {
 					System.out.println(p);
 				} else {

@@ -11,6 +11,7 @@ public class NewLinkedList {
 
 		ListItem<Character> tmp = new ListItem<Character>();
 		ListItem<Character> tmp2 = new ListItem<Character>();
+		ListItem<Character> tmp22 = new ListItem<Character>();
 		ListItem<Character> tmp3 = new ListItem<Character>();
 		ListItem<Character> tmp4 = new ListItem<Character>();
 		ListItem<Character> tmp5 = new ListItem<Character>();
@@ -21,6 +22,9 @@ public class NewLinkedList {
 		tmp.key = 'a';
 		tmp.next = tmp2;
 		tmp2.key = 'b';
+		tmp2.next = tmp22;
+		tmp22.key = 'x';
+		tmp22.next = null;
 
 		p.next = p2;
 		p2.key = tmp3;

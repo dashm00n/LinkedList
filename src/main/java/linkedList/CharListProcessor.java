@@ -19,37 +19,37 @@ public class CharListProcessor {
 			throws ListOfListsExceptions {
 
 		Character sentinal = '&';
-		int p_position = 0;
+		int pointerPosition = 0;
 
 		// run through list of lists
 		for (ListItem<ListItem<Character>> p = listOfLists; p != null; p = p.next) {
-			int sub_p_position = 0;
+			int subPointerPosition = 0;
 
-			ListItem<Character> sub_head = new ListItem<Character>();
-			sub_head = p.key;
+			ListItem<Character> subHead = new ListItem<Character>();
+			subHead = p.key;
 
 			// run through sublist
-			for (ListItem<Character> sub_p = sub_head; sub_p != null; sub_p = sub_p.next) {
+			for (ListItem<Character> subP = subHead; subP != null; subP = subP.next) {
 
-				if (sub_p.key == null) {
-					throw new ListOfListsExceptions(p_position, sub_p_position, true);
-				} else if (sub_p.key == sentinal) {
-					throw new ListOfListsExceptions(p_position, sub_p_position, false);
+				if (subP.key == null) {
+					throw new ListOfListsExceptions(pointerPosition, subPointerPosition, true);
+				} else if (subP.key == sentinal) {
+					throw new ListOfListsExceptions(pointerPosition, subPointerPosition, false);
 				}
 
 				// connect last and first element of current and next sublist with a sentinal
-				if (sub_p.next == null && p.next != null) {
-					ListItem<Character> sentinal_item = new ListItem<Character>();
-					sentinal_item.key = sentinal;
-					sub_p.next = sentinal_item;
-					sentinal_item.next = p.next.key;
+				if (subP.next == null && p.next != null) {
+					ListItem<Character> sentinalItem = new ListItem<Character>();
+					sentinalItem.key = sentinal;
+					subP.next = sentinalItem;
+					sentinalItem.next = p.next.key;
 					break;
 				}
 
-				sub_p_position++;
+				subPointerPosition++;
 
 			}
-			p_position++;
+			pointerPosition++;
 
 		}
 
@@ -73,47 +73,47 @@ public class CharListProcessor {
 		head = list;
 
 		Character sentinal = '&';
-		int p_position = 0;
+		int pointerPosition = 0;
 
 		// run through list of lists
 		for (ListItem<ListItem<Character>> p = listOfLists; p != null; p = p.next) {
-			int sub_p_position = 0;
+			int subPointerPosition = 0;
 
-			ListItem<Character> sub_head = new ListItem<Character>();
-			sub_head = p.key;
+			ListItem<Character> subHead = new ListItem<Character>();
+			subHead = p.key;
 
 			// run through sublists
-			for (ListItem<Character> sub_p = sub_head; sub_p != null; sub_p = sub_p.next) {
+			for (ListItem<Character> subP = subHead; subP != null; subP = subP.next) {
 
-				if (sub_p.key == null) {
-					throw new ListOfListsExceptions(p_position, sub_p_position, true);
-				} else if (sub_p.key == sentinal) {
-					throw new ListOfListsExceptions(p_position, sub_p_position, false);
+				if (subP.key == null) {
+					throw new ListOfListsExceptions(pointerPosition, subPointerPosition, true);
+				} else if (subP.key == sentinal) {
+					throw new ListOfListsExceptions(pointerPosition, subPointerPosition, false);
 				}
 
-				list.key = sub_p.key;
+				list.key = subP.key;
 
 				// last item reached
-				if (sub_p.next == null && p.next == null) {
+				if (subP.next == null && p.next == null) {
 					break;
 				}
 				// connect last and first element of current and next sublist with a sentinal
-				else if (sub_p.next == null && p.next != null) {
+				else if (subP.next == null && p.next != null) {
 					list.key = sentinal;
-					ListItem<Character> next_list_item = new ListItem<Character>();
-					list.next = next_list_item;
+					ListItem<Character> nextListItem = new ListItem<Character>();
+					list.next = nextListItem;
 					list = list.next;
 					break;
 				} else {
-					ListItem<Character> next_item = new ListItem<Character>();
-					list.next = next_item;
+					ListItem<Character> nextItem = new ListItem<Character>();
+					list.next = nextItem;
 					list = list.next;
 				}
 
-				sub_p_position++;
+				subPointerPosition++;
 
 			}
-			p_position++;
+			pointerPosition++;
 
 		}
 
@@ -132,13 +132,13 @@ public class CharListProcessor {
 	public static ListItem<ListItem<Character>> makeListOfListsInPlace(ListItem<Character> list,
 			ValidCharacterTest pred) throws ListOfListsExceptions {
 
-		int p_position = 0;
-		int sub_p_position = 0;
+		int pointerPosition = 0;
+		int subPointerPosition = 0;
 		Character sentinal = '&';
-		Character next_key;
+		Character nextKey;
 
 		// check if list is empty
-		pred.test(list.key, p_position, sub_p_position);
+		pred.test(list.key, pointerPosition, subPointerPosition);
 
 		// TODO: handle sentinals in first position
 
@@ -149,32 +149,32 @@ public class CharListProcessor {
 
 		while (list.next != null) {
 
-			next_key = list.next.key;
+			nextKey = list.next.key;
 
-			if (pred.test(next_key, p_position, sub_p_position)) {
+			if (pred.test(nextKey, pointerPosition, subPointerPosition)) {
 
-				ListItem<Character> next_head = new ListItem<Character>();
-				next_head = list.next.next;
+				ListItem<Character> nextHead = new ListItem<Character>();
+				nextHead = list.next.next;
 				list.next = null;
 
 				// handle consecutive sentinals
-				while (next_head.key == sentinal) {
-					ListItem<ListItem<Character>> empty_toplevel_head = new ListItem<ListItem<Character>>();
-					p.next = empty_toplevel_head;
+				while (nextHead.key == sentinal) {
+					ListItem<ListItem<Character>> emptyToplevelHead = new ListItem<ListItem<Character>>();
+					p.next = emptyToplevelHead;
 					p = p.next;
-					next_head = next_head.next;
-					if (next_head == null) {
-						ListItem<ListItem<Character>> last_empty_toplevel_head = new ListItem<ListItem<Character>>();
-						p.next = last_empty_toplevel_head;
+					nextHead = nextHead.next;
+					if (nextHead == null) {
+						ListItem<ListItem<Character>> lastEmptyToplevelHead = new ListItem<ListItem<Character>>();
+						p.next = lastEmptyToplevelHead;
 						p = p.next;
 						return head;
 					}
 				}
 
-				list = next_head;
+				list = nextHead;
 
-				ListItem<ListItem<Character>> next_toplevel_head = new ListItem<ListItem<Character>>();
-				p.next = next_toplevel_head;
+				ListItem<ListItem<Character>> nextToplevelHead = new ListItem<ListItem<Character>>();
+				p.next = nextToplevelHead;
 				p.next.key = list;
 				p = p.next;
 			}
@@ -201,56 +201,56 @@ public class CharListProcessor {
 	public static ListItem<ListItem<Character>> makeListOfListsAsCopy(ListItem<Character> list, ValidCharacterTest pred)
 			throws ListOfListsExceptions {
 
-		int p_position = 0;
-		int sub_p_position = 0;
+		int pointerPosition = 0;
+		int subPointerPosition = 0;
 		Character sentinal = '&';
-		Character next_key;
+		Character nextKey;
 
 		// check if list is empty
-		pred.test(list.key, p_position, sub_p_position);
+		pred.test(list.key, pointerPosition, subPointerPosition);
 
 		// TODO: handle sentinals in first position
 
 		ListItem<ListItem<Character>> head = new ListItem<ListItem<Character>>();
 		ListItem<ListItem<Character>> p = new ListItem<ListItem<Character>>();
-		ListItem<Character> sub_p = new ListItem<Character>();
-		sub_p.key = list.key;
-		head.key = sub_p;
+		ListItem<Character> subP = new ListItem<Character>();
+		subP.key = list.key;
+		head.key = subP;
 		p = head;
 
 		while (list.next != null) {
-			next_key = list.next.key;
-			ListItem<Character> next_item = new ListItem<Character>();
+			nextKey = list.next.key;
+			ListItem<Character> nextItem = new ListItem<Character>();
 
-			if (pred.test(next_key, p_position, sub_p_position)) {
+			if (pred.test(nextKey, pointerPosition, subPointerPosition)) {
 				// jump over sentinal item and create new list
-				ListItem<ListItem<Character>> next_toplevel_head = new ListItem<ListItem<Character>>();
+				ListItem<ListItem<Character>> nextToplevelHead = new ListItem<ListItem<Character>>();
 
 				// handle consecutive sentinals
 				while (list.next.next != null && list.next.next.key == sentinal) {
-					ListItem<ListItem<Character>> empty_toplevel_head = new ListItem<ListItem<Character>>();
-					p.next = empty_toplevel_head;
+					ListItem<ListItem<Character>> emptyToplevelHead = new ListItem<ListItem<Character>>();
+					p.next = emptyToplevelHead;
 					p = p.next;
 					list = list.next;
 				}
 
 				try {
-					next_item.key = list.next.next.key;
+					nextItem.key = list.next.next.key;
 				} catch (NullPointerException e) {
-					p.next = next_toplevel_head;
+					p.next = nextToplevelHead;
 					return head;
 				}
 
-				p.next = next_toplevel_head;
-				p.next.key = next_item;
+				p.next = nextToplevelHead;
+				p.next.key = nextItem;
 				p = p.next;
-				sub_p = next_item;
+				subP = nextItem;
 				list = list.next.next;
 
 			} else {
-				sub_p.next = next_item;
-				next_item.key = next_key;
-				sub_p = sub_p.next;
+				subP.next = nextItem;
+				nextItem.key = nextKey;
+				subP = subP.next;
 				list = list.next;
 			}
 		}
@@ -258,101 +258,78 @@ public class CharListProcessor {
 	}
 
 	/**
-	 * Notizen zur H7
+	 * Function to reverse list of lists inplace (iteratively). Sublists are
+	 * reversed in the same manner.
 	 * 
-	 * Parameter: ListItem<ListItem<Character>>
-	 * 
-	 * Rückgabe: ListItem<ListItem<Character>> Verweis auf den Kopf der umgedrehten
-	 * Hautpliste
-	 * 
-	 * Aufgabe: Umdrehen der Hauptliste (inplace -> wiederverwenden der Objekte)
-	 * Dabei sollen auch die einzelnen Hauptlisten selbst umgedreht werden. key der
-	 * Hautplisten zeigt dann auf das ursprüngliche Ende der Listen.
-	 * 
+	 * @param list head of the original list of lists
+	 * @return returns the new head (former end) of the list of lists
 	 */
 	public static ListItem<ListItem<Character>> reverseListOfListsInPlaceIteratively(
 			ListItem<ListItem<Character>> list) {
 
-		// Erstellen der Notwendigen ArrayLists
-		ArrayList<ListItem<Character>> sub_buffer = new ArrayList<ListItem<Character>>();
-		ArrayList<ListItem<ListItem<Character>>> buffer = new ArrayList<ListItem<ListItem<Character>>>();
+		ArrayList<ListItem<Character>> arrayOfListItems = new ArrayList<ListItem<Character>>();
+		ArrayList<ListItem<ListItem<Character>>> arrayOfLists = new ArrayList<ListItem<ListItem<Character>>>();
 
-		// Durchlaufen der Oberliste und umdrehen der Unterlisten. Jedem p.key wird nun
-		// der Start der umgedrehten Liste hinzugefügt
+		// run through ListOfLists, reverse sublists
 		for (ListItem<ListItem<Character>> p = list; p != null; p = p.next) {
 
-			sub_buffer.clear();
-
-			// Rein in eine Unterliste
-			// Objekte in eine ArrayList einfügen
-			for (ListItem<Character> sub_p = p.key; sub_p != null; sub_p = sub_p.next) {
-				sub_buffer.add(sub_p);
+			arrayOfListItems.clear();
+			// store sublist
+			for (ListItem<Character> subP = p.key; subP != null; subP = subP.next) {
+				arrayOfListItems.add(subP);
 			}
 
-			// Neuen Kopf initialisieren (letzte Stelle des Arrays)
-			int size = sub_buffer.size();
-			ListItem<Character> newSubHead = sub_buffer.get(size - 1);
-
-			// Rückwärts Durchlaufen des Arrays
-			for (ListItem<Character> new_pointer = newSubHead; size != 0; size--) {
-				new_pointer = sub_buffer.get(size - 1);
-				try {
-					new_pointer.next = sub_buffer.get(size - 2);
-				} catch (IndexOutOfBoundsException e) {
-					new_pointer.next = null;
-				}
-			}
+			ListItem<Character> newSubHead = reverseListInPlace(arrayOfListItems);
 			p.key = newSubHead;
 		}
 
-		// Durchlaufen der Oberliste. Umdrehen der Zuordnung. Erste Unterliste zuletzt
-		// und andersrum.
+		// store list of lists
 		for (ListItem<ListItem<Character>> p = list; p != null; p = p.next) {
-			buffer.add(p);
+			arrayOfLists.add(p);
 		}
 
-		// Neuen Kopf der Oberliste zuweisen (-> vormals letztes Element).
-		int size = buffer.size();
-		ListItem<ListItem<Character>> newHead = buffer.get(size - 1);
+		ListItem<ListItem<Character>> newHead = reverseListInPlace(arrayOfLists);
+		return newHead;
+	}
 
-		// Rückwärts Durchlaufen des Arrays
-		for (ListItem<ListItem<Character>> new_pointer = newHead; size != 0; size--) {
-			new_pointer = buffer.get(size - 1);
-			try {
-				new_pointer.next = buffer.get(size - 2);
-			} catch (IndexOutOfBoundsException e) {
-				new_pointer.next = null;
-			}
+	public static <T> ListItem<T> reverseListInPlace(ArrayList<? extends ListItem<T>> arr) {
+		int sizeListOfLists = arr.size();
+		ListItem<T> newHead = arr.get(sizeListOfLists - 1);
+		ListItem<T> newPointer = newHead;
 
-			new_pointer = new_pointer.next;
+		// reverse list of lists
+		for (int i = sizeListOfLists - 1; i != 0; i--) {
+			newPointer.next = arr.get(i - 1);
+			newPointer = (ListItem<T>) newPointer.next;
 		}
-
+		newPointer.next = null;
 		return newHead;
 	}
 
 	/**
-	 * Function to reverse a linked list of linked lists in place (recursively).
-	 * The simple linked lists in the list of lists are also reversed in the same way.
+	 * Function to reverse a linked list of linked lists in place (recursively). The
+	 * simple linked lists in the list of lists are also reversed in the same way.
 	 * 
 	 * @param head head of the list of lists
 	 * @return returns the new head (former end) of the list of lists
 	 */
-	public static ListItem<ListItem<Character>> reverseListOfListsInPlaceRecursively(ListItem<ListItem<Character>> head) {
-		
+	public static ListItem<ListItem<Character>> reverseListOfListsInPlaceRecursively(
+			ListItem<ListItem<Character>> head) {
+
 		if (head.next == null || head == null) {
 			return head;
 		}
-		
+
 		ListItem<ListItem<Character>> newHead = reverseListOfListsInPlaceRecursively(head.next);
-		
+
 		head.next.next = head;
 		head.next = null;
-		
+
 		newHead.key = reverseListInPlaceRecursivley(newHead.key);
-		
+
 		return newHead;
 	}
-	
+
 	/**
 	 * Function to reverse a simple linked list in place (recursively).
 	 * 
@@ -366,7 +343,7 @@ public class CharListProcessor {
 		}
 
 		ListItem<Character> newHead = reverseListInPlaceRecursivley(head.next);
-		
+
 		head.next.next = head;
 		head.next = null;
 
@@ -409,7 +386,7 @@ public class CharListProcessor {
 		// Erstellen der benötigten Listenelemente
 		ListItem<ListItem<Character>> head = new ListItem<ListItem<Character>>();
 		ListItem<ListItem<Character>> p = new ListItem<ListItem<Character>>();
-		ListItem<Character> sub_p = new ListItem<Character>();
+		ListItem<Character> subP = new ListItem<Character>();
 		head = p;
 
 		// Defaultwert für line initialisieren.
@@ -433,22 +410,22 @@ public class CharListProcessor {
 			if (line != null) {
 				// Prüfen ob der eingelesen String leer ist. -> leere Unterliste.
 				if (line.length() == 0) {
-					sub_p.next = null;
+					subP.next = null;
 				} else {
 					for (int size = line.length(); size > 0; size--) {
 						value = line.charAt(i);
-						sub_p.key = value;
+						subP.key = value;
 
 						// Kopf der Oberliste mit Kopf der Unterliste verbinden.
 						if (size == line.length()) {
-							p.key = sub_p;
+							p.key = subP;
 						}
 
 						// Neues Listenelement, falls das Ende noch nicht erreicht wurde.
 						if (size > 1) {
 							ListItem<Character> tmp = new ListItem<Character>();
-							sub_p.next = tmp;
-							sub_p = sub_p.next;
+							subP.next = tmp;
+							subP = subP.next;
 						}
 						i++;
 					}
@@ -461,13 +438,13 @@ public class CharListProcessor {
 				// Ende der aktuellen Unterliste -> Neues Objekt ohne Referenz zu einem anderen
 				// Objekt.
 				ListItem<Character> tmp = new ListItem<Character>();
-				sub_p = tmp;
+				subP = tmp;
 
 				// Erstellen der nächsten Liste mithilfer eines Hilfsobjektes;
 				ListItem<ListItem<Character>> tmp2 = new ListItem<ListItem<Character>>();
 				p.next = tmp2;
 				p = p.next;
-				p.key = sub_p;
+				p.key = subP;
 			}
 			counter++;
 		}
