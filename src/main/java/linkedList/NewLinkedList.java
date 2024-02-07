@@ -24,7 +24,7 @@ public class NewLinkedList {
 		tmp2.key = 'b';
 		tmp2.next = tmp22;
 		tmp22.key = 'x';
-		tmp22.next = null;
+//		tmp22.next = null;
 
 		p.next = p2;
 		p2.key = tmp3;
@@ -39,8 +39,8 @@ public class NewLinkedList {
 		tmp5.key = 'e';
 		tmp5.next = tmp6;
 		tmp6.key = 'f';
-//		tmp6.next = tmp7;
-//		tmp7.key = 'l';
+		tmp6.next = tmp7;
+		tmp7.key = 'g';
 
 		return p;
 	}
@@ -50,7 +50,6 @@ public class NewLinkedList {
 		// Eigene kleine LinkedList
 		ListItem<ListItem<Character>> p = new ListItem<ListItem<Character>>();
 		ListItem<ListItem<Character>> p2 = new ListItem<ListItem<Character>>();
-		ListItem<ListItem<Character>> p3 = new ListItem<ListItem<Character>>();
 
 		ListItem<Character> tmp = new ListItem<Character>();
 		ListItem<Character> tmp2 = new ListItem<Character>();
@@ -88,13 +87,13 @@ public class NewLinkedList {
 		tmp2.next = tmp3;
 		tmp3.key = 'c';
 		tmp3.next = tmp4;
-		tmp4.key = 'd';
+		tmp4.key = '&';
 		tmp4.next = tmp5;
 		tmp5.key = 'e';
-//		tmp5.next = tmp6;
-//		tmp6.key = '&';
-//		tmp6.next = tmp7;
-//		tmp7.key = '&';
+		tmp5.next = tmp6;
+		tmp6.key = 'f';
+		tmp6.next = tmp7;
+		tmp7.key = 'g';
 
 		return tmp;
 	}

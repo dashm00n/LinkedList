@@ -28,7 +28,7 @@ public class Main {
 //		System.out.println("\n");
 
 		/*
-		 * H4 list of list -> simple linked list as copy
+		 * H4 list of lists -> simple linked list as copy
 		 */
 //		ListItem<Character> head_flat_list_copy = CharListProcessor.makeFlatListAsCopy(NewLinkedList.newListOfLists());
 //		Utilities.showLinkedList(head_flat_list_copy, false);
